@@ -5,6 +5,9 @@ const Interview = () => {
   const [officerToogle, setOfficerToogle] = useState(false);
   const [feedbackToogle, setFeedbackToogle] = useState(false);
   const [responseToogle, setResponseToogle] = useState(false);
+  const [cameraToogle, setCameraToogle] = useState(false);
+
+  const [question, setquestion] = useState(false);
 
   const handleOfficerToogle = () => {
     setOfficerToogle(!officerToogle);
@@ -22,6 +25,10 @@ const Interview = () => {
     setResponseToogle(!responseToogle);
     setOfficerToogle(false);
     setFeedbackToogle(false);
+  };
+
+  const handleCameraToogle = () => {
+    setCameraToogle(!cameraToogle);
   };
 
   return (
@@ -50,21 +57,52 @@ const Interview = () => {
             Use the mic icon to speak and your answers will appear here...
           </div>
 
-          <div className='h-52 sdm:h-full flex flex-col gap-4 sdm:justify-between justify-around'>
+          <div className='sdm:h-full flex flex-col gap-4 sdm:justify-between justify-around'>
             <div className='flex flex-col gap-2 w-full h-full sdm:w-60 sdm:h-44 border rounded-md p-3 bg-white'>
               <div className='flex items-center mx-1 justify-between'>
                 <div className='text-xs'>Student</div>
-                <div className='cursor-pointer'>
-                  <Image
-                    src='/videocam.svg'
-                    width={18}
-                    height={18}
-                  />
+                <div className='flex gap-6'>
+                  <div className='cursor-pointer'>
+                    <Image
+                      src='/videocam.svg'
+                      width={18}
+                      height={18}
+                    />
+                  </div>
+                  <div
+                    className='cursor-pointer sdm:hidden'
+                    onClick={handleCameraToogle}>
+                    {cameraToogle ? (
+                      <Image
+                        src='/down-arrow.svg'
+                        width={18}
+                        height={18}
+                      />
+                    ) : (
+                      <Image
+                        src='/up-arrow.svg'
+                        width={18}
+                        height={18}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
 
-              <div className='flex justify-center items-center border rounded-md w-full h-full'>
+              {cameraToogle && (
+                <div className='sdm:hidden flex justify-center items-center border rounded-md w-full h-full'>
+                  <Image
+                    className='my-16 sdm:my-10'
+                    src='/talking-2.svg'
+                    width={35}
+                    height={35}
+                  />
+                </div>
+              )}
+
+              <div className='hidden sdm:flex justify-center items-center border rounded-md w-full h-full'>
                 <Image
+                  className='my-16 sdm:my-10'
                   src='/talking-2.svg'
                   width={35}
                   height={35}
@@ -73,19 +111,12 @@ const Interview = () => {
             </div>
           </div>
         </div>
-        <div className='flex flex-col gap-8 px-4 pt-6 pb-8 w-full'>
-          <div className='flex flex-col justify-center items-center gap-6'>
-            {/* <div className='cursor-pointer smd:w-fit'>
-              <Image
-                src='/retake.svg'
-                width={30}
-                height={30}
-              />
-            </div> */}
 
+        <div className='flex flex-col gap-8 px-4 pt-6 pb-8 w-full'>
+          <div className='flex flex-col justify-center items-center gap-8'>
             <div class='relative flex h-30 w-30 cursor-pointer'>
               <div class='animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75'></div>
-              <div class='relative inline-flex rounded-full p-2 bg-red-500'>
+              <div class='relative inline-flex shadow-lg rounded-full p-2 bg-red-500'>
                 <Image
                   src='/mic.svg'
                   width={40}
@@ -93,24 +124,28 @@ const Interview = () => {
                 />
               </div>
             </div>
-            <div> 0:00/1:00</div>
+            <div className='font-bold'>0:00/1:00</div>
           </div>
-          <div className='w-full flex justify-center items-center gap-3.5 text-sm '>
-            <div className='px-3.5 py-1 w-20 text-center border bg-gray-100 cursor-pointer shadow-md rounded-md'>
-              Previous
+
+          {question && (
+            <div className='w-full flex justify-center items-center gap-3.5 text-sm '>
+              <div className='px-3.5 py-1 w-20 text-center border bg-gray-100 cursor-pointer shadow-md rounded-md'>
+                Previous
+              </div>
+              <div className='px-3.5 py-1 bg-gray-500 text-center text-white cursor-pointer w-fit shadow-mdxw border rounded-full'>
+                <Image
+                  src='/end-call.svg'
+                  width={22}
+                  height={22}
+                />
+              </div>
+              <div className='px-3.5 py-1 w-20 text-center border cursor-pointer shadow-sm rounded-md bg-white'>
+                Next
+              </div>
             </div>
-            <div className='px-3.5 py-1 bg-gray-500 text-center text-white cursor-pointer w-fit shadow-md rounded-full'>
-              <Image
-                src='/end-call.svg'
-                width={22}
-                height={22}
-              />
-            </div>
-            <div className='px-3.5 py-1 w-20 text-center border cursor-pointer shadow-sm rounded-md bg-white'>
-              Next
-            </div>
-          </div>
+          )}
         </div>
+
         <div
           onClick={handleOfficerToogle}
           className='flex text-sm justify-between items-top bg-gray-50 cursor-pointer border-y p-4'>
