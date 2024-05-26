@@ -1,6 +1,6 @@
-@import url(./fonts.css);
+/* @import url(./fonts.css); */
 
-/* @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,7 +8,7 @@
 
 @layer base {
   html {
-    font-family: 'Cerebri Sans', sans-serif, system-ui;
-    /* font-family: 'Nunito', sans-serif, system-ui; */
+    /* font-family: 'Cerebri Sans', sans-serif, system-ui; */
+    font-family: 'Nunito', sans-serif, system-ui;
   }
 }
