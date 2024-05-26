@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 
-const Interview = () => {
+const Interview2 = () => {
   const [officerToogle, setOfficerToogle] = useState(false);
   const [feedbackToogle, setFeedbackToogle] = useState(false);
   const [responseToogle, setResponseToogle] = useState(false);
@@ -27,10 +27,9 @@ const Interview = () => {
   return (
     <div className='flex sdm:flex-row flex-col p-4 gap-4 rounded-xl h-fit'>
       <div className='border sdm:w-[600px] w-full flex flex-col h-fit rounded-lg shadow-lg bg-white'>
-        <div className='flex justify-between gap-2 border-b p-4'>
-          <div className=' flex gap-1.5 items-start sdm:items-center font-semibold'>
-            <div>Q1: </div>
-            <div>How many other universities you applied?</div>
+        <div className='flex justify-between border-b p-4'>
+          <div className='font-semibold'>
+            Q1: How many other universities you applied?
           </div>
           <div className='cursor-pointer w-fit'>
             <Image
@@ -40,18 +39,35 @@ const Interview = () => {
             />
           </div>
         </div>
-        <div className='flex flex-col-reverse sdm:flex-row gap-4 justify-between p-4 pb-6'>
-          <div
-            className=' h-24 sdm:h-44 border outline-none rounded-md w-full p-2 text-xs text-gray-400'
-            contentEditable='true'
-            onInput={(e) =>
-              console.log('Text inside div', e.currentTarget.textContent)
-            }>
-            Use the mic icon to speak and your answers will appear here...
+        <div className='flex flex-col sdm:flex-row gap-4 justify-between p-4 pb-6'>
+          <div className='w-full flex flex-col gap-6 justify-center items-center'>
+            <div
+              className='h-40 border outline-none rounded-md w-full p-2 text-xs text-gray-400'
+              contentEditable='true'
+              onInput={(e) =>
+                console.log('Text inside div', e.currentTarget.textContent)
+              }>
+              Use the mic icon to speak and your answers will appear here...
+            </div>
+            <div className='hidden sdm:flex items-center gap-3.5 text-sm '>
+              <div className='px-3.5 py-1 w-20 text-center border bg-gray-100 cursor-pointer shadow-md rounded-md'>
+                Previous
+              </div>
+              <div className='px-3.5 py-1 bg-gray-500 text-center text-white cursor-pointer w-fit shadow-md rounded-full'>
+                <Image
+                  src='/end-call.svg'
+                  width={22}
+                  height={22}
+                />
+              </div>
+              <div className='px-3.5 py-1 w-20 text-center border cursor-pointer shadow-sm rounded-md bg-white'>
+                Next
+              </div>
+            </div>
           </div>
 
-          <div className='h-52 sdm:h-full flex flex-col gap-4 sdm:justify-between justify-around'>
-            <div className='flex flex-col gap-2 w-full h-full sdm:w-60 sdm:h-44 border rounded-md p-3 bg-white'>
+          <div className='flex flex-col gap-4 sdm:justify-between justify-around'>
+            <div className='flex flex-col gap-2 w-full h-full sdm:w-60 sdm:h-44 border rounded-md shadow-md p-3 bg-white'>
               <div className='flex items-center mx-1 justify-between'>
                 <div className='text-xs'>Student</div>
                 <div className='cursor-pointer'>
@@ -71,43 +87,29 @@ const Interview = () => {
                 />
               </div>
             </div>
-          </div>
-        </div>
-        <div className='flex flex-col gap-8 px-4 pt-6 pb-8 w-full'>
-          <div className='flex flex-col justify-center items-center gap-6'>
-            {/* <div className='cursor-pointer smd:w-fit'>
-              <Image
-                src='/retake.svg'
-                width={30}
-                height={30}
-              />
-            </div> */}
 
-            <div class='relative flex h-30 w-30 cursor-pointer'>
-              <div class='animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75'></div>
-              <div class='relative inline-flex rounded-full p-2 bg-red-500'>
+            <div className='flex justify-between items-center gap-6'>
+              <div className='cursor-pointer w-[70px] smd:w-fit'>
                 <Image
-                  src='/mic.svg'
-                  width={40}
-                  height={40}
+                  src='/retake.svg'
+                  width={30}
+                  height={30}
                 />
               </div>
-            </div>
-            <div> 0:00/1:00</div>
-          </div>
-          <div className='w-full flex justify-center items-center gap-3.5 text-sm '>
-            <div className='px-3.5 py-1 w-20 text-center border bg-gray-100 cursor-pointer shadow-md rounded-md'>
-              Previous
-            </div>
-            <div className='px-3.5 py-1 bg-gray-500 text-center text-white cursor-pointer w-fit shadow-md rounded-full'>
-              <Image
-                src='/end-call.svg'
-                width={22}
-                height={22}
-              />
-            </div>
-            <div className='px-3.5 py-1 w-20 text-center border cursor-pointer shadow-sm rounded-md bg-white'>
-              Next
+
+              <div class='relative flex h-30 w-30 mr-2 cursor-pointer'>
+                <div class='animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75'></div>
+                <div class='relative inline-flex rounded-full p-2 bg-red-500'>
+                  <Image
+                    src='/mic.svg'
+                    width={40}
+                    height={40}
+                  />
+                </div>
+              </div>
+              <div className='bg-gray-50 text-center p-2 text-green-700 border font-bold rounded-md text-xs'>
+                0:00/1:00
+              </div>
             </div>
           </div>
         </div>
@@ -208,4 +210,4 @@ const Interview = () => {
   );
 };
 
-export default Interview;
+export default Interview2;

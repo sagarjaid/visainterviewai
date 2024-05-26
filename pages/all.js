@@ -7,9 +7,9 @@ export default function Home() {
   return (
     <main className='h-full my-10 flex flex-col justify-center bg-stone-50 items-center'>
       <Interview />
-      {/* <Interview2 />
+      <Interview2 />
       <Interviewx />
-      <Interviewx2 /> */}
+      <Interviewx2 />
     </main>
   );
 }
