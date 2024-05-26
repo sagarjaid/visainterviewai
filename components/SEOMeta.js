@@ -62,7 +62,7 @@ const SEOMeta = (props) => {
       />
       <link
         rel='icon'
-        href='https://visainterviewai.com/favicon.png'
+        href='https://visainterviewai.com/favicon.svg'
       />
     </Head>
   );

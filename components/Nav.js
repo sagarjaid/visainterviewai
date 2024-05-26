@@ -15,7 +15,7 @@ const Nav = () => {
       <a href='/'>
         <img
           src='/logo-2.svg'
-          className='w-[150px] sd:w-[190px]'
+          className='w-[180px] sd:w-[220px]'
         />
       </a>
       <div
