@@ -264,7 +264,7 @@ const Interviewx2 = () => {
           </div>
         </div>
       </div>
-      <div className='w-full hidden sdm:w-fit sdm:flex sdm:flex-col gap-6  '>
+      <div className='w-full hidden sdm:w-fit sdm:flex sdm:flex-col gap-8'>
         <div className='flex flex-col gap-2 w-full h-full sdm:w-60 sdm:h-44 border rounded-md shadow-md p-3 bg-white'>
           <div className='text-xs ml-1'>Visa officer</div>
           <div className='flex justify-center items-center border rounded-md w-full h-full'>

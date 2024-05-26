@@ -33,7 +33,7 @@ const Interview = () => {
 
   return (
     <div className='flex sdm:flex-row flex-col p-4 gap-4 rounded-xl h-fit'>
-      <div className='border sdm:w-[600px] w-full flex flex-col h-fit rounded-lg shadow-lg bg-white'>
+      <div className='border sdm:w-[600px] w-full flex flex-col h-fit rounded-lg drop-shadow-xl bg-white'>
         <div className='flex justify-between gap-2 border-b p-4'>
           <div className=' flex gap-1.5 items-start sdm:items-center font-semibold'>
             <div>Q1: </div>
