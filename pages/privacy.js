@@ -10,9 +10,7 @@ const Privacy = () => {
         description='Hashtags for Instagram, Tiktok, Twitter, & more. Best Hashtag Generator in 2023'
         slug='privacy'
       />
-      <HelloBar />
       <main className='m-auto flex h-screen max-w-5xl flex-col px-4'>
-        <Nav />
         <div className='flex flex-col items-start justify-center gap-6 px-4 py-10 '>
           <div className='flex flex-col gap-2 text-2xl font-medium'>
             Privacy Policy
