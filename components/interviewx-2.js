@@ -65,13 +65,13 @@ const Interviewx2 = () => {
                       onClick={handleCameraToogle}>
                       {cameraToogle ? (
                         <Image
-                          src='/down-arrow.svg'
+                          src='/up-arrow.svg'
                           width={18}
                           height={18}
                         />
                       ) : (
                         <Image
-                          src='/up-arrow.svg'
+                          src='/down-arrow.svg'
                           width={18}
                           height={18}
                         />
@@ -188,13 +188,13 @@ const Interviewx2 = () => {
           <div>
             {officerToogle ? (
               <Image
-                src='/down-arrow.svg'
+                src='/up-arrow.svg'
                 width={25}
                 height={25}
               />
             ) : (
               <Image
-                src='/up-arrow.svg'
+                src='/down-arrow.svg'
                 width={25}
                 height={25}
               />
@@ -219,13 +219,13 @@ const Interviewx2 = () => {
           <div>
             {feedbackToogle ? (
               <Image
-                src='/down-arrow.svg'
+                src='/up-arrow.svg'
                 width={25}
                 height={25}
               />
             ) : (
               <Image
-                src='/up-arrow.svg'
+                src='/down-arrow.svg'
                 width={25}
                 height={25}
               />
@@ -250,13 +250,13 @@ const Interviewx2 = () => {
           <div>
             {responseToogle ? (
               <Image
-                src='/down-arrow.svg'
+                src='/up-arrow.svg'
                 width={25}
                 height={25}
               />
             ) : (
               <Image
-                src='/up-arrow.svg'
+                src='/down-arrow.svg'
                 width={25}
                 height={25}
               />
