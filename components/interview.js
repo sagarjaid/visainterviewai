@@ -69,7 +69,7 @@ const Interview = () => {
     startRecording,
     stopRecording,
   } = useWhisper({
-    apiKey: process.env.OPEN_KEY || "xyz",
+    apiKey: process.env.NEXT_PUBLIC_OPEN_KEY,
     removeSilence: true,
     // autoStart: true,
     stopTimeout: 120000,
