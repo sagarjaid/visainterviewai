@@ -17,6 +17,7 @@ const Interview = () => {
   const [countdown, setCountdown] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [officerSpeaking, setOfficerSpeaking] = useState(false);
+  const [isEditable, setIsEditable] = useState(false);
 
   const [visaOfficerResponse, setVisaOfficerResponse] = useState(false);
   const [visaOfficerResponseText, setVisaOfficerResponseText] = useState('');
@@ -218,7 +219,7 @@ const Interview = () => {
     const timer = setTimeout(() => {
       sound.play();
       setOfficerSpeaking(true);
-    }, 5000);
+    }, 2000);
 
     return () => {
       clearTimeout(timer);
@@ -312,6 +313,11 @@ const Interview = () => {
 
     handleTextToSpeech(resData1?.result);
   };
+
+  const handleContentEditable = () => {
+    setIsEditable(!isEditable);
+  };
+
   return (
     <div className='flex sdm:flex-row flex-col p-4 gap-4 rounded-xl h-fit'>
       <div className='border sdm:w-[600px] w-full flex flex-col h-fit rounded-lg drop-shadow-xl bg-white'>
@@ -355,8 +361,10 @@ const Interview = () => {
         </div>
         <div className='flex flex-col-reverse sdm:flex-row gap-4 justify-between p-4 pb-6'>
           <div
-            className=' h-24 sdm:h-52 border outline-none rounded-md w-full p-2 text-xs text-gray-400'
-            contentEditable='true'
+            className={`h-24 sdm:h-52 border rounded-md w-full p-2 text-xs text-gray-400 ${
+              isEditable ? 'border-gray-400 outline-gray-400' : 'outline-none'
+            }`}
+            contentEditable={isEditable}
             onInput={(e) =>
               console.log('Text inside div', e.currentTarget.textContent)
             }>
@@ -366,13 +374,13 @@ const Interview = () => {
           </div>
 
           <div className='sdm:h-full flex flex-col gap-4 sdm:justify-between justify-around'>
-            <div className='flex flex-col gap-2 w-full h-full sdm:w-60  border rounded-md p-3 bg-white'>
+            <div className='flex flex-col gap-2 w-full h-full min-w-60  border rounded-md p-3 bg-white'>
               <div className='flex items-center mx-1 justify-between'>
                 <div className='text-xs'>
-                  {isMobile || isTablet ? 'Visa Officer' : 'Student'}
+                  {isMobile ? 'Visa Officer' : 'Student'}
                 </div>
                 <div className='flex items-center gap-4'>
-                  {isMobile || isTablet ? (
+                  {isMobile ? (
                     <div>
                       <Image
                         src='/talking-2.svg'
@@ -401,7 +409,7 @@ const Interview = () => {
                   )}
 
                   <div
-                    className='cursor-pointer sdm:hidden'
+                    className='cursor-pointer xs:hidden'
                     onClick={handleUpToogle}>
                     {cameraToogle ? (
                       <Image
@@ -426,7 +434,7 @@ const Interview = () => {
                 </div>
               )} */}
 
-              {cameraToogle && !isDesktop && (
+              {cameraToogle && !isDesktop && !isTablet && (
                 <div className='flex justify-center items-center border rounded-md w-full h-full'>
                   <Image
                     className='my-16 sdm:my-10'
@@ -437,17 +445,20 @@ const Interview = () => {
                 </div>
               )}
 
-              {isDesktop && (
-                <div className='flex justify-center items-center border rounded-md w-full h-[159px]'>
+              {(isDesktop || isTablet) && !isMobile && (
+                <div className='flex justify-center items-center rounded-md w-full h-[159px]'>
                   {!cameraToogle || err ? (
-                    <Image
-                      className='my-16 sdm:my-10'
-                      src='/talking-2.svg'
-                      width={35}
-                      height={35}
-                    />
+                    <div className='flex justify-center items-center rounded-md border w-full h-full'>
+                      <Image
+                        src='/talking-2.svg'
+                        width={35}
+                        height={35}
+                      />
+                    </div>
                   ) : (
-                    <Webcam stream={stream} />
+                    <div className=' w-52  h-[159px]'>
+                      <Webcam stream={stream} />
+                    </div>
                   )}
                 </div>
               )}
@@ -569,6 +580,12 @@ const Interview = () => {
               )}
             </div>
           )}
+
+          <div
+            onClick={handleContentEditable}
+            className='flex justify-center text-xs cursor-pointer ml-1 underline'>
+            Type or Edit the Answer
+          </div>
         </div>
 
         <div

@@ -17,7 +17,7 @@ const Webcam = ({ stream }) => {
       <video
         ref={videoRef}
         autoPlay
-        className=' rounded-md transform scale-x-[-1]'
+        className='w-full h-full rounded-md transform scale-x-[-1]'
       />
     </div>
   );
