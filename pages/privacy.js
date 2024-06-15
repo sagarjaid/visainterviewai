@@ -1,6 +1,4 @@
-import React from 'react';
-
-import SEOMeta from '@/components/SEOMeta';
+import SEOMeta from '@/components/atoms/SEOMeta';
 
 const Privacy = () => {
   return (

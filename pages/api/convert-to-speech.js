@@ -1,4 +1,4 @@
-import { createAudioStreamFromText } from '@/components/elevenLabs';
+import { createAudioStreamFromText } from '@/components/helper/elevenLabs';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {

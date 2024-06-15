@@ -1,4 +1,3 @@
-// components/Webcam.js
 import { useEffect, useRef } from 'react';
 
 const Webcam = ({ stream }) => {

@@ -1,7 +1,6 @@
-// hooks/useResponsive.js
 import { useEffect, useState } from 'react';
 
-const useDevice = () => {
+export const useDeviceDetection = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
@@ -9,9 +8,9 @@ const useDevice = () => {
   useEffect(() => {
     const handleResize = () => {
       const windowWidth = window.innerWidth;
-      setIsMobile(windowWidth < 350);
+      setIsMobile(windowWidth < 480);
       setIsDesktop(windowWidth >= 990);
-      setIsTablet(windowWidth >= 350 && windowWidth < 990);
+      setIsTablet(windowWidth >= 480 && windowWidth < 990);
     };
 
     // Initial setup
@@ -26,5 +25,3 @@ const useDevice = () => {
 
   return { isMobile, isDesktop, isTablet };
 };
-
-export default useDevice;
