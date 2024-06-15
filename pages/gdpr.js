@@ -1,4 +1,5 @@
 import SEOMeta from '@/components/atoms/SEOMeta';
+import Nav from '@/components/atoms/nav';
 
 const GDPR = () => {
   return (

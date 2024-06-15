@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { useLoadUrl } from '@/hooks/useLoadUrl';
 
 const LoginWithGoogle = () => {
   const [user, setUser] = useState();
 
   const router = useRouter();
+  const handleHomePageClik = useLoadUrl();
 
   let Name;
   let Email;
@@ -48,7 +50,7 @@ const LoginWithGoogle = () => {
 
   return (
     <button
-      onClick={handelScrollDown}
+      onClick={() => handleHomePageClik(event)}
       className='flex items-center gap-2 rounded-full border border-gray-700 bg-white py-2.5 pl-6 pr-4 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-1 '>
       {/* <svg
         className='h-4 w-4'

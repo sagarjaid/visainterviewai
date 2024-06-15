@@ -10,7 +10,7 @@ const QuestionControls = () => {
         Previous Question
       </div>
       <div
-        className='px-6 py-1 pb-2 text-center flex flex-col justify-center items-center w-fit bg-green-500 border cursor-pointer shadow-md rounded-full text-white'
+        className='px-6 py-1 pb-2 text-center flex flex-col justify-center items-center w-fit bg-green-500 border cursor-pointer shadow-md rounded-lg text-white'
         onClick={reloadPage}>
         <Image
           src='/end-call.svg'

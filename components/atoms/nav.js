@@ -1,4 +1,8 @@
+import { useLoadUrl } from '@/hooks/useLoadUrl';
+
 const Nav = () => {
+  const handleHomePageClik = useLoadUrl();
+
   const handelScrollDown = () => {
     window.scrollTo({
       top: document.body.scrollHeight,
@@ -14,7 +18,7 @@ const Nav = () => {
         />
       </a>
       <div
-        onClick={handelScrollDown}
+        onClick={() => handleHomePageClik(event)}
         className='flex cursor-pointer items-center gap-1 justify-around  rounded-full bg-gray-800 p-2.5 px-4 text-white'>
         <span className='text-xs'>Let' Get Started</span>
         <svg
