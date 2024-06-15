@@ -15,13 +15,11 @@ export default async function handler(req, res) {
 
   try {
     const response = await openai.chat.completions.create({
-      messages: [{ role: 'user', content: userPrompt }],
-
       messages: [
         {
           role: 'system',
           content:
-            'You are a us visa officer and you just asked me this question "Why do you want the US student visa today?" and following is my answer. note: you should respond in 2-3 words only',
+            'You are a us visa officer and you only reply with these "Hmm", "Okay", "Understood", "Okay Let us move to next question"',
         },
         { role: 'user', content: userPrompt },
       ],

@@ -8,7 +8,7 @@ import { formatTime } from '../helper/helper';
 import { useCountdownTimer } from '@/hooks/useCountdownTimer';
 import { useApiCall } from '@/hooks/useApiCall';
 
-const SpeachContainer = ({
+const SpeechContainer = ({
   setOfficerToogle,
   handleTextToSpeech,
   recording,
@@ -16,6 +16,10 @@ const SpeachContainer = ({
   startRecording,
   stopRecording,
   setVisaOfficerResponseText,
+  handleNextQuestion,
+  currentQuestionIndex,
+  totalQuestions,
+  handleResult,
 }) => {
   const [visaOfficerResponse, setVisaOfficerResponse] = useState(false);
   const [answer, setAnswer] = useState(false);
@@ -69,7 +73,13 @@ const SpeachContainer = ({
       {visaOfficerResponse ? (
         <>
           <RetakeAnswer handleRetake={handleRetake} />
-          <QuestionControls />
+
+          <QuestionControls
+            handleNextQuestion={handleNextQuestion}
+            currentQuestionIndex={currentQuestionIndex}
+            totalQuestions={totalQuestions}
+            handleResult={handleResult}
+          />
         </>
       ) : (
         <div className='flex flex-col justify-center items-center gap-4'>
@@ -113,4 +123,4 @@ const SpeachContainer = ({
   );
 };
 
-export default SpeachContainer;
+export default SpeechContainer;

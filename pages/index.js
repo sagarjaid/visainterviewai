@@ -1,8 +1,8 @@
 import Nav from '@/components/atoms/nav';
 import SEOMeta from '@/components/atoms/SEOMeta';
 import LoginWithGoogle from '@/components/atoms/loginWithGoogle';
-import VisaInterview from '@/components/core/visaInterview';
 import { useLoadUrl } from '@/hooks/useLoadUrl';
+import VisaInterviewHomePage from '@/components/core/visaInterviewHomePage';
 
 const Home = () => {
   const handleHomePageClik = useLoadUrl();
@@ -42,7 +42,7 @@ const Home = () => {
           className='cursor-pointer'
           onClick={() => handleHomePageClik(event)}>
           <div className='pointer-events-none'>
-            <VisaInterview />
+            <VisaInterviewHomePage />
           </div>
         </div>
       </div>
