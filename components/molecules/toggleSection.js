@@ -6,20 +6,28 @@ const ToggleSection = ({
   isToggled,
   onToggle,
   handleTextToSpeech,
-  setToogle,
-  lastToogle,
+  setToggle,
+  lastToggle,
 }) => {
-  const handleToogleTextToSpeech = (content, event) => {
+  const handleToggleTextToSpeech = (content, event) => {
     event.stopPropagation();
     handleTextToSpeech(content);
-    setToogle(true);
+    setToggle(true);
   };
 
+  console.log(isToggled, 'isToggled');
+
+  const handleToggle = () => {
+    onToggle();
+    if (!isToggled) {
+      handleTextToSpeech(content);
+    }
+  };
   return (
     <div
-      onClick={onToggle}
+      onClick={handleToggle}
       className={`flex text-sm justify-between items-top bg-gray-50 cursor-pointer border-b p-4 ${
-        lastToogle ? 'rounded-lg' : 'rounded-none'
+        lastToggle ? 'rounded-lg' : 'rounded-none'
       }`}>
       <div className='flex flex-col gap-3 max-w-[80%]'>
         <div>{title}</div>
@@ -35,7 +43,7 @@ const ToggleSection = ({
         </div>
         {isToggled && (
           <div
-            onClick={(event) => handleToogleTextToSpeech(content, event)}
+            onClick={(event) => handleToggleTextToSpeech(content, event)}
             className='cursor-pointer w-fit mt-1'>
             <Image
               src='/speaker-on.svg'

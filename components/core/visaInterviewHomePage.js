@@ -10,15 +10,15 @@ import { useTextToSpeech } from '@/hooks/useTextToSpeech';
 
 const VisaInterviewHomePage = () => {
   const {
-    officerToogle,
-    feedbackToogle,
-    responseToogle,
-    setOfficerToogle,
-    setFeedbackToogle,
-    setResponseToogle,
-    handleOfficerToogle,
-    handleFeedbackToogle,
-    handleResponseToogle,
+    officerToggle,
+    feedbackToggle,
+    responseToggle,
+    setOfficerToggle,
+    setFeedbackToggle,
+    setResponseToggle,
+    handleOfficerToggle,
+    handleFeedbackToggle,
+    handleResponseToggle,
   } = useToggle();
 
   const handleTextToSpeech = useTextToSpeech();
@@ -38,7 +38,7 @@ const VisaInterviewHomePage = () => {
         />
         <UserFeedbackView userAnswer={transcript.text} />
         <SpeechContainer
-          setOfficerToogle={setOfficerToogle}
+          setOfficerToggle={setOfficerToggle}
           handleTextToSpeech={handleTextToSpeech}
           recording={recording}
           transcript={transcript}
@@ -48,16 +48,16 @@ const VisaInterviewHomePage = () => {
         />
         <ToggleSections
           visaOfficerResponseText={visaOfficerResponseText}
-          officerToogle={officerToogle}
-          setOfficerToogle={setOfficerToogle}
-          handleOfficerToogle={handleOfficerToogle}
+          officerToggle={officerToggle}
+          setOfficerToggle={setOfficerToggle}
+          handleOfficerToggle={handleOfficerToggle}
           handleTextToSpeech={handleTextToSpeech}
-          feedbackToogle={feedbackToogle}
-          setFeedbackToogle={setFeedbackToogle}
-          handleFeedbackToogle={handleFeedbackToogle}
-          responseToogle={responseToogle}
-          setResponseToogle={setResponseToogle}
-          handleResponseToogle={handleResponseToogle}
+          feedbackToggle={feedbackToggle}
+          setFeedbackToggle={setFeedbackToggle}
+          handleFeedbackToggle={handleFeedbackToggle}
+          responseToggle={responseToggle}
+          setResponseToggle={setResponseToggle}
+          handleResponseToggle={handleResponseToggle}
         />
       </div>
     </div>

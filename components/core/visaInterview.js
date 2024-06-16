@@ -10,15 +10,15 @@ import { useTextToSpeech } from '@/hooks/useTextToSpeech';
 
 const VisaInterview = ({ baseInterviewQuestions }) => {
   const {
-    officerToogle,
-    feedbackToogle,
-    responseToogle,
-    setOfficerToogle,
-    setFeedbackToogle,
-    setResponseToogle,
-    handleOfficerToogle,
-    handleFeedbackToogle,
-    handleResponseToogle,
+    officerToggle,
+    feedbackToggle,
+    responseToggle,
+    setOfficerToggle,
+    setFeedbackToggle,
+    setResponseToggle,
+    handleOfficerToggle,
+    handleFeedbackToggle,
+    handleResponseToggle,
   } = useToggle();
 
   const handleTextToSpeech = useTextToSpeech();
@@ -27,6 +27,9 @@ const VisaInterview = ({ baseInterviewQuestions }) => {
     useWhisperRecording(process.env.NEXT_PUBLIC_OPENAI_KEY);
 
   const [visaOfficerResponseText, setVisaOfficerResponseText] = useState('');
+  const [visaOfficerFeedbackText, setVisaOfficerFeedbackText] = useState('');
+  const [visaOfficerSampleResponseText, setVisaOfficerSampleResponseText] =
+    useState('');
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
@@ -34,6 +37,9 @@ const VisaInterview = ({ baseInterviewQuestions }) => {
     if (currentQuestionIndex < baseInterviewQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
+    setOfficerToggle(false);
+    setFeedbackToggle(false);
+    setResponseToggle(false);
   };
 
   const handleResult = () => {
@@ -59,30 +65,38 @@ const VisaInterview = ({ baseInterviewQuestions }) => {
 
         <UserFeedbackView userAnswer={transcript.text} />
         <SpeechContainer
-          setOfficerToogle={setOfficerToogle}
+          setOfficerToggle={setOfficerToggle}
           handleTextToSpeech={handleTextToSpeech}
           recording={recording}
           transcript={transcript}
           startRecording={startRecording}
           stopRecording={stopRecording}
           setVisaOfficerResponseText={setVisaOfficerResponseText}
+          setVisaOfficerFeedbackText={setVisaOfficerFeedbackText}
+          setVisaOfficerSampleResponseText={setVisaOfficerSampleResponseText}
           handleNextQuestion={handleNextQuestion}
           currentQuestionIndex={currentQuestionIndex}
           totalQuestions={totalQuestions}
           handleResult={handleResult}
+          baseInterviewQuestions={baseInterviewQuestions}
+          currentQuestion={
+            baseInterviewQuestions[currentQuestionIndex].question
+          }
         />
         <ToggleSections
           visaOfficerResponseText={visaOfficerResponseText}
-          officerToogle={officerToogle}
-          setOfficerToogle={setOfficerToogle}
-          handleOfficerToogle={handleOfficerToogle}
+          visaOfficerFeedbackText={visaOfficerFeedbackText}
+          visaOfficerSampleResponseText={visaOfficerSampleResponseText}
+          officerToggle={officerToggle}
+          setOfficerToggle={setOfficerToggle}
+          handleOfficerToggle={handleOfficerToggle}
           handleTextToSpeech={handleTextToSpeech}
-          feedbackToogle={feedbackToogle}
-          setFeedbackToogle={setFeedbackToogle}
-          handleFeedbackToogle={handleFeedbackToogle}
-          responseToogle={responseToogle}
-          setResponseToogle={setResponseToogle}
-          handleResponseToogle={handleResponseToogle}
+          feedbackToggle={feedbackToggle}
+          setFeedbackToggle={setFeedbackToggle}
+          handleFeedbackToggle={handleFeedbackToggle}
+          responseToggle={responseToggle}
+          setResponseToggle={setResponseToggle}
+          handleResponseToggle={handleResponseToggle}
         />
       </div>
     </div>

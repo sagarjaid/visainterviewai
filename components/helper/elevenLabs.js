@@ -16,7 +16,7 @@ const client = new ElevenLabsClient({
 
 export const createAudioStreamFromText = async (text) => {
   const audioStream = await client.generate({
-    voice: 'Adam',
+    voice: 'Grace',
     model_id: 'eleven_turbo_v2',
     text,
   });

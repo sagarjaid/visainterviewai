@@ -28,6 +28,7 @@ export const useCountdownTimer = (
 
   const startTimer = () => setIsRunning(true);
   const stopTimer = () => setIsRunning(false);
+  const resetTimer = () => setCountdown(0);
 
-  return { countdown, isRunning, startTimer, stopTimer };
+  return { countdown, isRunning, startTimer, stopTimer, resetTimer };
 };

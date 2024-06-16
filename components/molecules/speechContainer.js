@@ -9,17 +9,21 @@ import { useCountdownTimer } from '@/hooks/useCountdownTimer';
 import { useApiCall } from '@/hooks/useApiCall';
 
 const SpeechContainer = ({
-  setOfficerToogle,
+  setOfficerToggle,
   handleTextToSpeech,
   recording,
   transcript,
   startRecording,
   stopRecording,
   setVisaOfficerResponseText,
+  setVisaOfficerFeedbackText,
+  setVisaOfficerSampleResponseText,
   handleNextQuestion,
   currentQuestionIndex,
   totalQuestions,
   handleResult,
+  baseInterviewQuestions,
+  currentQuestion,
 }) => {
   const [visaOfficerResponse, setVisaOfficerResponse] = useState(false);
   const [answer, setAnswer] = useState(false);
@@ -28,7 +32,7 @@ const SpeechContainer = ({
     handleStopRecording();
   }, []);
 
-  const { countdown, startTimer, stopTimer } = useCountdownTimer(
+  const { countdown, startTimer, stopTimer, resetTimer } = useCountdownTimer(
     false,
     120,
     handleTimerEnd
@@ -45,18 +49,52 @@ const SpeechContainer = ({
     stopRecording();
     setAnswer(true);
     stopTimer();
+    resetTimer();
     setTimeout(async () => {
+      let userResponse = transcript.text;
       try {
         const resData1 = await callApi('/api/getData', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ tag: transcript.text }),
+          body: JSON.stringify({
+            baseInterviewQuestions: baseInterviewQuestions,
+            currentQuestion: currentQuestion,
+            userAnswer: userResponse,
+          }),
         });
 
-        setVisaOfficerResponseText(resData1?.result);
-        handleTextToSpeech(resData1?.result);
+        const x = {
+          currentQuestion: {
+            visaOfficerResponse: "Okay, let's move to the next question",
+            feedbackToStudent:
+              'Your answer highlights your preference for University of Spitzer, but it would be beneficial to mention specific reasons such as academic programs, faculty, or campus facilities.',
+            sampleResponse:
+              'I chose University of Spitzer because of its renowned engineering program and state-of-the-art research facilities. The faculty members have strong industry connections, providing valuable networking opportunities for my future career.',
+          },
+          VisaStatus: false,
+          isError: false,
+        };
+
+        const visaOfficerRes = JSON.parse(resData1?.result);
+        console.log(visaOfficerRes, 'resData1?.result');
+        setVisaOfficerResponseText(
+          visaOfficerRes?.currentQuestion?.visaOfficerResponse
+        );
+
+        handleTextToSpeech(
+          visaOfficerRes?.currentQuestion?.visaOfficerResponse
+        );
+
+        setVisaOfficerFeedbackText(
+          visaOfficerRes?.currentQuestion?.feedbackToStudent
+        );
+
+        setVisaOfficerSampleResponseText(
+          visaOfficerRes?.currentQuestion?.sampleResponse
+        );
+
         setAnswer(false);
-        setOfficerToogle(true);
+        setOfficerToggle(true);
         setVisaOfficerResponse(true);
       } catch (error) {
         console.error('Failed to fetch data:', error);
@@ -68,6 +106,18 @@ const SpeechContainer = ({
     setAnswer(false);
   };
 
+  const handleNextQuestionWithReset = () => {
+    handleNextQuestion();
+    setVisaOfficerResponse(false);
+    setOfficerToggle(false);
+    setVisaOfficerResponseText('');
+    setVisaOfficerFeedbackText('');
+    setVisaOfficerSampleResponseText('');
+    setAnswer(false);
+    stopTimer();
+    resetTimer();
+  };
+
   return (
     <div className='flex flex-col gap-8 px-4 pt-6 pb-8 w-full'>
       {visaOfficerResponse ? (
@@ -75,7 +125,7 @@ const SpeechContainer = ({
           <RetakeAnswer handleRetake={handleRetake} />
 
           <QuestionControls
-            handleNextQuestion={handleNextQuestion}
+            handleNextQuestion={handleNextQuestionWithReset}
             currentQuestionIndex={currentQuestionIndex}
             totalQuestions={totalQuestions}
             handleResult={handleResult}

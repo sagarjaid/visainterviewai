@@ -2,16 +2,18 @@ import ToggleSection from './toggleSection';
 
 const ToggleSections = ({
   visaOfficerResponseText,
-  officerToogle,
-  setOfficerToogle,
-  handleOfficerToogle,
+  visaOfficerFeedbackText,
+  visaOfficerSampleResponseText,
+  officerToggle,
+  setOfficerToggle,
+  handleOfficerToggle,
   handleTextToSpeech,
-  feedbackToogle,
-  setFeedbackToogle,
-  handleFeedbackToogle,
-  responseToogle,
-  setResponseToogle,
-  handleResponseToogle,
+  feedbackToggle,
+  setFeedbackToggle,
+  handleFeedbackToggle,
+  responseToggle,
+  setResponseToggle,
+  handleResponseToggle,
 }) => {
   return (
     <>
@@ -20,31 +22,39 @@ const ToggleSections = ({
         content={
           visaOfficerResponseText
             ? visaOfficerResponseText
-            : 'Answer the above given question to recive a response from visa officer '
+            : 'Answer the above question by pressing red micro-phone icon and receive a response from visa officer'
         }
-        isToggled={officerToogle}
-        setToogle={setOfficerToogle}
-        onToggle={handleOfficerToogle}
+        isToggled={officerToggle}
+        setToggle={setOfficerToggle}
+        onToggle={handleOfficerToggle}
         handleTextToSpeech={handleTextToSpeech}
-        lastToogle={false}
+        lastToggle={false}
       />
       <ToggleSection
         title='Feedback'
-        content='Use the mic icon to speak and your answers will appear here Use the mic icon to speak and your answers will appear here Use the mic icon to speak and your answers will appear here the mic icon to speak and your answers will appear here Use the mic icon to speak.'
-        isToggled={feedbackToogle}
-        setToogle={setFeedbackToogle}
-        onToggle={handleFeedbackToogle}
+        content={
+          visaOfficerFeedbackText
+            ? visaOfficerFeedbackText
+            : 'Answer the above question by pressing red micro-phone icon and receive a negative or positive feedback on your answer from visa officer.'
+        }
+        isToggled={feedbackToggle}
+        setToggle={setFeedbackToggle}
+        onToggle={handleFeedbackToggle}
         handleTextToSpeech={handleTextToSpeech}
-        lastToogle={false}
+        lastToggle={false}
       />
       <ToggleSection
         title='Sample response'
-        content='Use the mic icon to speak and your answers will appear here Use the mic icon to speak and your answers will appear here Use the mic icon to speak and your answers will appear here the mic icon to speak and your answers will appear here Use the mic icon to speak and your answers will appear here'
-        isToggled={responseToogle}
-        setToogle={setResponseToogle}
-        onToggle={handleResponseToogle}
+        content={
+          visaOfficerSampleResponseText
+            ? visaOfficerSampleResponseText
+            : 'Answer the above question by pressing red micro-phone icon to get to know how exactly you should answer this question directly from the visa officer.'
+        }
+        isToggled={responseToggle}
+        setToggle={setResponseToggle}
+        onToggle={handleResponseToggle}
         handleTextToSpeech={handleTextToSpeech}
-        lastToogle={true}
+        lastToggle={true}
       />
     </>
   );

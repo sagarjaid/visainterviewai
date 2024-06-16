@@ -1,37 +1,37 @@
 import { useState } from 'react';
 
 export const useToggle = () => {
-  const [officerToogle, setOfficerToogle] = useState(false);
-  const [feedbackToogle, setFeedbackToogle] = useState(false);
-  const [responseToogle, setResponseToogle] = useState(false);
+  const [officerToggle, setOfficerToggle] = useState(false);
+  const [feedbackToggle, setFeedbackToggle] = useState(false);
+  const [responseToggle, setResponseToggle] = useState(false);
 
-  const handleOfficerToogle = () => {
-    setOfficerToogle(!officerToogle);
-    setFeedbackToogle(false);
-    setResponseToogle(false);
+  const handleOfficerToggle = () => {
+    setOfficerToggle(!officerToggle);
+    setFeedbackToggle(false);
+    setResponseToggle(false);
   };
 
-  const handleFeedbackToogle = () => {
-    setFeedbackToogle(!feedbackToogle);
-    setOfficerToogle(false);
-    setResponseToogle(false);
+  const handleFeedbackToggle = () => {
+    setFeedbackToggle(!feedbackToggle);
+    setOfficerToggle(false);
+    setResponseToggle(false);
   };
 
-  const handleResponseToogle = () => {
-    setResponseToogle(!responseToogle);
-    setOfficerToogle(false);
-    setFeedbackToogle(false);
+  const handleResponseToggle = () => {
+    setResponseToggle(!responseToggle);
+    setOfficerToggle(false);
+    setFeedbackToggle(false);
   };
 
   return {
-    officerToogle,
-    feedbackToogle,
-    responseToogle,
-    setOfficerToogle,
-    setFeedbackToogle,
-    setResponseToogle,
-    handleOfficerToogle,
-    handleFeedbackToogle,
-    handleResponseToogle,
+    officerToggle,
+    feedbackToggle,
+    responseToggle,
+    setOfficerToggle,
+    setFeedbackToggle,
+    setResponseToggle,
+    handleOfficerToggle,
+    handleFeedbackToggle,
+    handleResponseToggle,
   };
 };
