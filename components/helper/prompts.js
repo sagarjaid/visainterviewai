@@ -1,7 +1,7 @@
 export const generateSystemRole = (
   baseInterviewQuestions,
   currentQuestion,
-  userAnswer
+  userAnswer,
 ) => {
   return `You are the visa officer who is taking my USA student visa interview, I'm a student who is seeking a USA student visa.
 

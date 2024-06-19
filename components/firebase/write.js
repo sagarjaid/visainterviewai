@@ -21,9 +21,9 @@ export const addUser = async (userData) => {
     await setDoc(userDocRef, userDataWithTimestamp);
 
     console.log("User data added successfully!");
-    return true
+    return true;
   } catch (error) {
     console.error("Error adding user data: ", error);
-    return false
+    return false;
   }
 };

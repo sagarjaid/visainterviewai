@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 const ToggleSection = ({
   title,
@@ -6,6 +6,7 @@ const ToggleSection = ({
   isToggled,
   onToggle,
   handleTextToSpeech,
+  isSpeaking,
   setToggle,
   lastToggle,
 }) => {
@@ -15,41 +16,47 @@ const ToggleSection = ({
     setToggle(true);
   };
 
-  console.log(isToggled, 'isToggled');
+  console.log(isToggled, "isToggled");
 
   const handleToggle = () => {
     onToggle();
-    if (!isToggled) {
+    if (!isToggled && !isSpeaking) {
       handleTextToSpeech(content);
     }
   };
   return (
     <div
       onClick={handleToggle}
-      className={`flex text-sm justify-between items-top bg-gray-50 cursor-pointer border-b p-4 ${
-        lastToggle ? 'rounded-lg' : 'rounded-none'
-      }`}>
-      <div className='flex flex-col gap-3 max-w-[80%]'>
+      className={`items-top flex cursor-pointer justify-between border-b bg-gray-50 p-4 text-sm ${
+        lastToggle ? "rounded-lg" : "rounded-none"
+      }`}
+    >
+      <div className="flex max-w-[80%] flex-col gap-3">
         <div>{title}</div>
-        {isToggled && <div className='text-xs text-gray-600'>{content}</div>}
+        {isToggled && <div className="text-xs text-gray-600">{content}</div>}
       </div>
-      <div className='flex flex-col gap-1 justify-start items-center'>
+      <div className="flex flex-col items-center justify-start gap-1">
         <div>
           <Image
-            src={isToggled ? '/up-arrow.svg' : '/down-arrow.svg'}
+            src={isToggled ? "/up-arrow.svg" : "/down-arrow.svg"}
             width={25}
             height={25}
           />
         </div>
         {isToggled && (
           <div
-            onClick={(event) => handleToggleTextToSpeech(content, event)}
-            className='cursor-pointer w-fit mt-1'>
-            <Image
-              src='/speaker-on.svg'
-              width={22}
-              height={22}
-            />
+            onClick={(event) =>
+              !isSpeaking && handleToggleTextToSpeech(content, event)
+            }
+            className={`${
+              isSpeaking ? "cursor-not-allowed" : "cursor-pointer"
+            } mt-1 w-fit`}
+          >
+            {isSpeaking ? (
+              <Image src="/wave-2.gif" width={22} height={22} />
+            ) : (
+              <Image src="/speaker-on.svg" width={22} height={22} />
+            )}
           </div>
         )}
       </div>

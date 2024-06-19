@@ -1,4 +1,4 @@
-import useWhisper from '@chengsokdara/use-whisper';
+import useWhisper from "@chengsokdara/use-whisper";
 
 export const useWhisperRecording = (key) => {
   const { recording, transcript, startRecording, stopRecording } = useWhisper({

@@ -1,11 +1,11 @@
-import React from 'react';
-import Countdown from 'react-countdown';
+import React from "react";
+import Countdown from "react-countdown";
 
 const SubmitAnswer = () => {
   const renderer = ({ seconds }) => <span>{seconds}</span>;
 
   return (
-    <div className='flex flex-col justify-center items-center gap-2'>
+    <div className="flex animate-pulse flex-col items-center justify-center gap-2 text-black">
       {/* <div
                   onClick={'handleSubmit'}
                   className='flex cursor-pointer w-fit items-center gap-2 justify-around border-2 border-green-600 rounded-full bg-green-500 p-2.5 px-4 text-white'>
@@ -25,14 +25,13 @@ const SubmitAnswer = () => {
                     />
                   </svg>
                 </div> */}
-      <div className='text-[10px] flex flex-col justify-center items-center gap-1'>
+      <div className="flex flex-col items-center justify-center gap-1 text-sm font-semibold">
         <span>Submitting your answer for feedback</span>
-        <span className='flex gap-1'>
+        <span className="flex gap-1">
           <span>automatically in</span>
-          <Countdown
-            date={Date.now() + 6000}
-            renderer={renderer}
-          />
+          <span className="text-base text-rose-600">
+            <Countdown date={Date.now() + 4000} renderer={renderer} />
+          </span>
           <span>seconds</span>
         </span>
       </div>

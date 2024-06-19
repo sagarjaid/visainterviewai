@@ -18,4 +18,4 @@ export const getUserById = async (userId) => {
     console.log("Error getting user: ", error);
     return null;
   }
-}
+};

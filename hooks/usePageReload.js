@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 export const usePageReload = () => {
   const router = useRouter();
 

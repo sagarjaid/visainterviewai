@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 const Webcam = ({ stream }) => {
   const videoRef = useRef(null);
@@ -16,7 +16,7 @@ const Webcam = ({ stream }) => {
       <video
         ref={videoRef}
         autoPlay
-        className='w-full h-full rounded-md transform scale-x-[-1]'
+        className="h-full w-full scale-x-[-1] transform rounded-md"
       />
     </div>
   );

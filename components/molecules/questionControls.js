@@ -1,6 +1,6 @@
-import Image from 'next/image';
+import Image from "next/image";
 
-import { usePageReload } from '@/hooks/usePageReload';
+import { usePageReload } from "@/hooks/usePageReload";
 
 const QuestionControls = ({
   handleNextQuestion,
@@ -11,17 +11,19 @@ const QuestionControls = ({
   const reloadPage = usePageReload();
 
   return (
-    <div className='w-full flex flex-col justify-center items-center gap-4 text-sm'>
+    <div className="flex w-full flex-col items-center justify-center gap-4 text-sm">
       {currentQuestionIndex < totalQuestions ? (
         <div
-          className='px-3.5 py-1.5 w-36 text-center border cursor-pointer hover:bg-slate-100 shadow-sm rounded-md bg-white'
-          onClick={handleNextQuestion}>
+          className="w-36 cursor-pointer rounded-md border bg-white px-3.5 py-1.5 text-center shadow-sm hover:bg-slate-100"
+          onClick={handleNextQuestion}
+        >
           Next Question
         </div>
       ) : (
         <div
-          className='px-3.5 py-1.5 w-fit text-center border border-green-200 hover:bg-green-200 cursor-pointer shadow-sm rounded-md bg-green-100'
-          onClick={handleResult}>
+          className="w-fit cursor-pointer rounded-md border border-green-200 bg-green-100 px-3.5 py-1.5 text-center shadow-sm hover:bg-green-200"
+          onClick={handleResult}
+        >
           End the Interview and get Results
         </div>
       )}

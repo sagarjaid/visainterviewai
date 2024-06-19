@@ -1,12 +1,12 @@
-import UserFeedbackView from '../molecules/userFeedbackView';
-import SpeechContainer from '../molecules/speechContainer';
-import ToggleSections from '../molecules/toggleSections';
-import Question from '../molecules/question';
+import UserFeedbackView from "../molecules/userFeedbackView";
+import SpeechContainer from "../molecules/speechContainer";
+import ToggleSections from "../molecules/toggleSections";
+import Question from "../molecules/question";
 
-import { useEffect, useState } from 'react';
-import { useWhisperRecording } from '@/hooks/useWhisperRecording';
-import { useToggle } from '@/hooks/useToggle';
-import { useTextToSpeech } from '@/hooks/useTextToSpeech';
+import { useEffect, useState } from "react";
+import { useWhisperRecording } from "@/hooks/useWhisperRecording";
+import { useToggle } from "@/hooks/useToggle";
+import { useTextToSpeech } from "@/hooks/useTextToSpeech";
 
 const VisaInterview = ({ baseInterviewQuestions }) => {
   const {
@@ -21,15 +21,15 @@ const VisaInterview = ({ baseInterviewQuestions }) => {
     handleResponseToggle,
   } = useToggle();
 
-  const handleTextToSpeech = useTextToSpeech();
+  const { handleTextToSpeech, isSpeaking } = useTextToSpeech();
 
   const { recording, transcript, startRecording, stopRecording } =
     useWhisperRecording(process.env.NEXT_PUBLIC_OPENAI_KEY);
 
-  const [visaOfficerResponseText, setVisaOfficerResponseText] = useState('');
-  const [visaOfficerFeedbackText, setVisaOfficerFeedbackText] = useState('');
+  const [visaOfficerResponseText, setVisaOfficerResponseText] = useState("");
+  const [visaOfficerFeedbackText, setVisaOfficerFeedbackText] = useState("");
   const [visaOfficerSampleResponseText, setVisaOfficerSampleResponseText] =
-    useState('');
+    useState("");
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
@@ -43,7 +43,7 @@ const VisaInterview = ({ baseInterviewQuestions }) => {
   };
 
   const handleResult = () => {
-    console.log(' getResult() got called');
+    console.log(" getResult() got called");
   };
 
   const totalQuestions = baseInterviewQuestions?.length - 1;
@@ -53,20 +53,26 @@ const VisaInterview = ({ baseInterviewQuestions }) => {
   }, [currentQuestionIndex]);
 
   return (
-    <div className='flex sdm:flex-row flex-col p-4 gap-4 rounded-xl h-fit'>
-      <div className='border sdm:w-[600px] w-full flex flex-col h-fit rounded-lg drop-shadow-xl bg-white'>
+    <div className="flex h-fit flex-col gap-4 rounded-xl p-4 sdm:flex-row">
+      <div className="flex h-fit w-full flex-col rounded-lg border bg-white drop-shadow-xl sdm:w-[600px]">
         <Question
           questionNumber={
             baseInterviewQuestions[currentQuestionIndex].questionNumber
           }
           question={baseInterviewQuestions[currentQuestionIndex].question}
           handleTextToSpeech={handleTextToSpeech}
+          isSpeaking={isSpeaking}
         />
 
-        <UserFeedbackView userAnswer={transcript.text} />
+        <UserFeedbackView
+          userAnswer={transcript.text}
+          recording={recording}
+          isSpeaking={isSpeaking}
+        />
         <SpeechContainer
           setOfficerToggle={setOfficerToggle}
           handleTextToSpeech={handleTextToSpeech}
+          isSpeaking={isSpeaking}
           recording={recording}
           transcript={transcript}
           startRecording={startRecording}
@@ -91,6 +97,7 @@ const VisaInterview = ({ baseInterviewQuestions }) => {
           setOfficerToggle={setOfficerToggle}
           handleOfficerToggle={handleOfficerToggle}
           handleTextToSpeech={handleTextToSpeech}
+          isSpeaking={isSpeaking}
           feedbackToggle={feedbackToggle}
           setFeedbackToggle={setFeedbackToggle}
           handleFeedbackToggle={handleFeedbackToggle}

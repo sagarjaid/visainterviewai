@@ -1,16 +1,18 @@
-import Image from 'next/image';
-import RetakeAnswer from './retakeAnswer';
-import QuestionControls from './questionControls';
-import SubmitAnswer from './submitAnswer';
+import Image from "next/image";
+import RetakeAnswer from "./retakeAnswer";
+import QuestionControls from "./questionControls";
+import SubmitAnswer from "./submitAnswer";
 
-import { useState, useCallback } from 'react';
-import { formatTime } from '../helper/helper';
-import { useCountdownTimer } from '@/hooks/useCountdownTimer';
-import { useApiCall } from '@/hooks/useApiCall';
+import { useState, useCallback } from "react";
+import { formatTime } from "../helper/helper";
+import { useCountdownTimer } from "@/hooks/useCountdownTimer";
+import { useApiCall } from "@/hooks/useApiCall";
+import { useRef } from "react";
 
 const SpeechContainer = ({
   setOfficerToggle,
   handleTextToSpeech,
+  isSpeaking,
   recording,
   transcript,
   startRecording,
@@ -27,6 +29,7 @@ const SpeechContainer = ({
 }) => {
   const [visaOfficerResponse, setVisaOfficerResponse] = useState(false);
   const [answer, setAnswer] = useState(false);
+  const timeoutRef = useRef(null);
 
   const handleTimerEnd = useCallback(() => {
     handleStopRecording();
@@ -35,7 +38,7 @@ const SpeechContainer = ({
   const { countdown, startTimer, stopTimer, resetTimer } = useCountdownTimer(
     false,
     120,
-    handleTimerEnd
+    handleTimerEnd,
   );
 
   const { callApi } = useApiCall();
@@ -50,12 +53,12 @@ const SpeechContainer = ({
     setAnswer(true);
     stopTimer();
     resetTimer();
-    setTimeout(async () => {
+    timeoutRef.current = setTimeout(async () => {
       let userResponse = transcript.text;
       try {
-        const resData1 = await callApi('/api/getData', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        const resData1 = await callApi("/api/getData", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             baseInterviewQuestions: baseInterviewQuestions,
             currentQuestion: currentQuestion,
@@ -63,67 +66,66 @@ const SpeechContainer = ({
           }),
         });
 
-        const x = {
-          currentQuestion: {
-            visaOfficerResponse: "Okay, let's move to the next question",
-            feedbackToStudent:
-              'Your answer highlights your preference for University of Spitzer, but it would be beneficial to mention specific reasons such as academic programs, faculty, or campus facilities.',
-            sampleResponse:
-              'I chose University of Spitzer because of its renowned engineering program and state-of-the-art research facilities. The faculty members have strong industry connections, providing valuable networking opportunities for my future career.',
-          },
-          VisaStatus: false,
-          isError: false,
-        };
-
         const visaOfficerRes = JSON.parse(resData1?.result);
-        console.log(visaOfficerRes, 'resData1?.result');
+        console.log(visaOfficerRes, "resData1?.result");
         setVisaOfficerResponseText(
-          visaOfficerRes?.currentQuestion?.visaOfficerResponse
+          visaOfficerRes?.currentQuestion?.visaOfficerResponse,
         );
 
         handleTextToSpeech(
-          visaOfficerRes?.currentQuestion?.visaOfficerResponse
+          !isSpeaking && visaOfficerRes?.currentQuestion?.visaOfficerResponse,
         );
 
         setVisaOfficerFeedbackText(
-          visaOfficerRes?.currentQuestion?.feedbackToStudent
+          visaOfficerRes?.currentQuestion?.feedbackToStudent,
         );
 
         setVisaOfficerSampleResponseText(
-          visaOfficerRes?.currentQuestion?.sampleResponse
+          visaOfficerRes?.currentQuestion?.sampleResponse,
         );
 
         setAnswer(false);
         setOfficerToggle(true);
         setVisaOfficerResponse(true);
       } catch (error) {
-        console.error('Failed to fetch data:', error);
+        console.error("Failed to fetch data:", error);
       }
-    }, 7000);
+    }, 4000);
   };
 
   const handleRetake = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+
+    setVisaOfficerResponse(false);
+    setOfficerToggle(false);
+    setVisaOfficerResponseText("");
+    setVisaOfficerFeedbackText("");
+    setVisaOfficerSampleResponseText("");
     setAnswer(false);
+    stopTimer();
+    resetTimer();
   };
 
   const handleNextQuestionWithReset = () => {
     handleNextQuestion();
     setVisaOfficerResponse(false);
     setOfficerToggle(false);
-    setVisaOfficerResponseText('');
-    setVisaOfficerFeedbackText('');
-    setVisaOfficerSampleResponseText('');
+    setVisaOfficerResponseText("");
+    setVisaOfficerFeedbackText("");
+    setVisaOfficerSampleResponseText("");
     setAnswer(false);
     stopTimer();
     resetTimer();
   };
 
   return (
-    <div className='flex flex-col gap-8 px-4 pt-6 pb-8 w-full'>
+    <div className="flex w-full flex-col gap-8 px-4 pb-8 pt-6">
       {visaOfficerResponse ? (
         <>
           <RetakeAnswer handleRetake={handleRetake} />
-
           <QuestionControls
             handleNextQuestion={handleNextQuestionWithReset}
             currentQuestionIndex={currentQuestionIndex}
@@ -132,39 +134,41 @@ const SpeechContainer = ({
           />
         </>
       ) : (
-        <div className='flex flex-col justify-center items-center gap-4'>
+        <div className="flex flex-col items-center justify-center gap-4">
           {!answer ? (
             <>
               {recording ? (
                 <div
                   onClick={handleStopRecording}
-                  className='flex h-30 w-30 p-2 bg-green-500 rounded-full shadow-lg cursor-pointer'>
-                  <Image
-                    src='/pause.svg'
-                    width={40}
-                    height={40}
-                  />
+                  className="h-30 w-30 flex cursor-pointer rounded-full bg-green-500 p-2 shadow-lg"
+                >
+                  <Image src="/pause.svg" width={40} height={40} />
                 </div>
               ) : (
                 <div
                   onClick={handleStartRecording}
-                  className='relative flex h-30 w-30 cursor-pointer'>
-                  <div className='animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75'></div>
-                  <div className='relative inline-flex shadow-lg rounded-full p-2 bg-red-500'>
-                    <Image
-                      src='/mic.svg'
-                      width={40}
-                      height={40}
-                    />
+                  className="h-30 w-30 relative flex cursor-pointer"
+                >
+                  <div className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></div>
+                  <div className="relative inline-flex rounded-full bg-red-500 p-2 shadow-lg">
+                    <Image src="/mic.svg" width={40} height={40} />
                   </div>
                 </div>
               )}
-              <div className='font-bold'>{formatTime(countdown)}/02:00</div>
+              <div className="mt-4 flex gap-1 text-xs font-bold">
+                {recording ? (
+                  <span className="text-rose-600">Stop</span>
+                ) : (
+                  <span className="text-green-700">Start</span>
+                )}
+                <span>recording your answer</span>
+              </div>
+              <div className="font-bold">{formatTime(countdown)}/02:00</div>
             </>
           ) : (
             <>
-              <RetakeAnswer handleRetake={handleRetake} />
               <SubmitAnswer />
+              <RetakeAnswer handleRetake={handleRetake} />
             </>
           )}
         </div>

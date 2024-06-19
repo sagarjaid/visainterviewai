@@ -1,21 +1,29 @@
-import Image from 'next/image';
+import Image from "next/image";
 
-const Question = ({ questionNumber, question, handleTextToSpeech }) => {
+const Question = ({
+  questionNumber,
+  question,
+  handleTextToSpeech,
+  isSpeaking,
+}) => {
   return (
-    <div className='flex justify-between gap-2 border-b p-4'>
-      <div className=' flex gap-1.5 items-start sdm:items-center font-semibold'>
+    <div className="flex justify-between gap-2 border-b p-4">
+      <div className="flex items-start gap-1.5 font-semibold sdm:items-center">
         <div>Q{questionNumber}:</div>
         <div>{question}</div>
       </div>
-      <div className='flex gap-2 items-center'>
+      <div className="flex items-center gap-2">
         <div
-          onClick={() => handleTextToSpeech(question)}
-          className='cursor-pointer w-fit'>
-          <Image
-            src='/speaker-on.svg'
-            width={25}
-            height={25}
-          />
+          onClick={() => !isSpeaking && handleTextToSpeech(question)}
+          className={`${
+            isSpeaking ? "cursor-not-allowed" : "cursor-pointer"
+          } w-fit`}
+        >
+          {isSpeaking ? (
+            <Image src="/wave-2.gif" width={25} height={25} />
+          ) : (
+            <Image src="/speaker-on.svg" width={25} height={25} />
+          )}
         </div>
       </div>
     </div>
