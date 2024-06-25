@@ -6,7 +6,8 @@ import Question from "../molecules/question";
 import { useEffect, useState } from "react";
 import { useWhisperRecording } from "@/hooks/useWhisperRecording";
 import { useToggle } from "@/hooks/useToggle";
-import { useTextToSpeech } from "@/hooks/useTextToSpeech";
+// import { useTextToSpeech } from "@/hooks/useTextToSpeech";
+import useSpeechSynthesis from '@/hooks/useSpeechSynthesis';
 
 const VisaInterview = ({ baseInterviewQuestions }) => {
   const {
@@ -21,7 +22,9 @@ const VisaInterview = ({ baseInterviewQuestions }) => {
     handleResponseToggle,
   } = useToggle();
 
-  const { handleTextToSpeech, isSpeaking } = useTextToSpeech();
+  // const { handleTextToSpeech, isSpeaking } = useTextToSpeech();
+
+  const { handleTextToSpeech, isSpeaking } = useSpeechSynthesis()
 
   const { recording, transcript, startRecording, stopRecording } =
     useWhisperRecording(process.env.NEXT_PUBLIC_OPENAI_KEY);

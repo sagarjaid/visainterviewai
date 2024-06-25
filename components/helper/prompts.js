@@ -22,12 +22,12 @@ Base questions for this interview array in array of object format
 ${JSON.stringify(baseInterviewQuestions)}
 
 currentQuestion : ${currentQuestion}
-Student/My Answer:  ${userAnswer}
+Student Answer:  ${userAnswer}
 
 All Pervious question answers context: none
 
 How to send a response
-1. Based on the Interview factors, my answers to all the questions from context and the Visa Officer's mindset to reject a student for this visa interview. Analyze my profile and give the final result on student has been accepted or rejected for a USA student visa
+1. Based on the Interview factors, Student answers to all the questions from context and the Visa Officer's mindset to reject a student for this visa interview. Analyze Student profile and give the final result on student has been accepted or rejected for a USA student visa
 2. You will be provided with the base questions for this interview.
 3. You will have the context of the current question asked and the answer provided by the student in text format.
 4. You will also have all Pervious question answers context.
@@ -39,9 +39,9 @@ How to send a response
     visaOfficerResponse:
       ' This is Visa Officer Conversation Response and your Answer can be any of these "Okay", "Understood", "Okay let"s move to the next question"',
     feedbackToStudent:
-      'Your answer highlights good reasons for choosing Golden Gate University, especially mentioning the flexibility, specialization, and recommendations from alumni. This shows that you have done thorough research.',
+    'This is Visa Officer feedback to student on given student answer above, give feedback on Visa Officer mindset also ',
     sampleResponse:
-      'I chose Golden Gate University because it offers a flexible MBA program with a specialization in IT management, which aligns perfectly with my career goals. The experienced professors and positive feedback from alumni and current students further confirmed that this university is the right choice for my education.',
+      ' This is Visa Officer Response with example answer to the current question asked to student above, considering Visa Officer mindset',
   },
   VisaStatus: true as in if user is accepted || false as in student is rejected,
     'if I has not answered the question properly or answer in not related to USA student visa Interview factors then you must reply in true otherwise false',
