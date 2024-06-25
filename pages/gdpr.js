@@ -1,4 +1,5 @@
 import SEOMeta from '@/components/atoms/SEOMeta';
+import Footer from '@/components/atoms/footer';
 import Nav from '@/components/atoms/nav';
 
 const GDPR = () => {
@@ -164,7 +165,7 @@ const GDPR = () => {
             By using our website, you hereby consent to our Privacy Policy and
             agree to its terms.
           </p>
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </main>
     </>

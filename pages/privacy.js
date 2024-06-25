@@ -1,4 +1,5 @@
 import SEOMeta from '@/components/atoms/SEOMeta';
+import Footer from '@/components/atoms/footer';
 
 const Privacy = () => {
   return (
@@ -131,7 +132,7 @@ const Privacy = () => {
             By using our website, you hereby consent to our Privacy Policy and
             agree to its Terms and Conditions.
           </p>
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </main>
     </>

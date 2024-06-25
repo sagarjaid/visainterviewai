@@ -3,6 +3,7 @@ import VisaInterview from '@/components/core/visaInterview';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useApiCall } from '@/hooks/useApiCall';
+import Footer from '@/components/atoms/footer';
 
 const DynamicPage = () => {
   const [loading, setLoading] = useState(true);
@@ -67,7 +68,7 @@ const DynamicPage = () => {
           <div>loading new interview...</div>
         </div>
       ) : (
-        <div className='flex justify-center mt-12 h-screen'>
+        <div className='flex flex-col gap-4 items-center justify-center py-12'>
           <VisaInterview baseInterviewQuestions={baseInterviewQuestions} />
         </div>
       )}

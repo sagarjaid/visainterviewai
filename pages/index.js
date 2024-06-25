@@ -3,6 +3,7 @@ import SEOMeta from '@/components/atoms/SEOMeta';
 import LoginWithGoogle from '@/components/atoms/loginWithGoogle';
 import { useLoadUrl } from '@/hooks/useLoadUrl';
 import VisaInterviewHomePage from '@/components/core/visaInterviewHomePage';
+import Footer from '@/components/atoms/footer';
 
 const Home = () => {
   const handleHomePageClik = useLoadUrl();
@@ -45,6 +46,7 @@ const Home = () => {
             <VisaInterviewHomePage />
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );
